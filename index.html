@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+﻿﻿﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"/>
@@ -3045,6 +3045,124 @@ body{-webkit-tap-highlight-color:transparent;}
   #view-schedule .v16ScheduleControls > [data-action="scheduleAdd"]{grid-column:1 / -1;}
 }
 </style>
+
+  <style id="settings-layout-fix-v1">
+    body{
+      background:
+        radial-gradient(1200px 600px at 20% -10%, var(--ui-glow-1, rgba(125,211,252,.22)), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, var(--ui-glow-2, rgba(167,139,250,.20)), transparent 60%),
+        radial-gradient(900px 600px at 50% 110%, var(--ui-glow-3, rgba(52,211,153,.10)), transparent 60%),
+        var(--bg) !important;
+    }
+
+    #view-settings{
+      position:relative;
+      z-index:3;
+      padding-top:12px !important;
+      padding-bottom:calc(132px + env(safe-area-inset-bottom, 0px)) !important;
+      overflow:visible !important;
+      isolation:isolate;
+    }
+    #view-settings > .grid.cols2{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px !important;
+      align-items:start;
+    }
+    #view-settings .card{
+      overflow:visible !important;
+      position:relative;
+    }
+    #view-settings .card .hd,
+    #view-settings .card .bd{
+      position:relative;
+      z-index:1;
+    }
+    #view-settings .card .bd{
+      padding-bottom:14px !important;
+    }
+    #view-settings .row{
+      display:flex !important;
+      flex-wrap:wrap !important;
+      gap:10px !important;
+      align-items:stretch;
+      overflow:visible !important;
+    }
+    #view-settings .row > .btn,
+    #view-settings .row > button.btn{
+      flex:1 1 calc(50% - 5px);
+      min-width:0;
+      justify-content:center;
+      text-align:center;
+      white-space:normal;
+      line-height:1.35;
+      padding:12px 12px;
+    }
+    #view-settings input,
+    #view-settings textarea,
+    #view-settings select{
+      width:100%;
+      min-width:0;
+    }
+    #view-settings .notice{
+      border-radius:16px;
+      overflow:visible;
+    }
+    #view-settings .small,
+    #view-settings .muted{
+      line-height:1.7;
+    }
+
+    
+
+    @media (min-width: 900px){
+      #view-settings > .grid.cols2{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+      #view-settings .row > .btn,
+      #view-settings .row > button.btn{flex:1 1 calc(33.333% - 7px);}
+      .settingsPrimaryActions > .btn,
+      .settingsPrimaryActions > button.btn{flex:1 1 calc(50% - 5px) !important;}
+    }
+
+    @media (max-width: 720px){
+      #view-settings{padding-top:10px !important;}
+      #view-settings .card .hd{padding-bottom:8px !important;}
+      #view-settings .row > .btn,
+      #view-settings .row > button.btn{flex:1 1 calc(50% - 5px);}
+    }
+
+    @media (max-width: 480px){
+      #view-settings{
+        padding-left:10px !important;
+        padding-right:10px !important;
+        padding-bottom:calc(146px + env(safe-area-inset-bottom, 0px)) !important;
+      }
+      #view-settings > .grid.cols2{gap:10px !important;}
+      #view-settings .card{border-radius:18px !important;}
+      #view-settings .card .hd,
+      #view-settings .card .bd{padding-left:10px !important; padding-right:10px !important;}
+      #view-settings .row{gap:8px !important;}
+      #view-settings .row > .btn,
+      #view-settings .row > button.btn{flex:1 1 100%; padding:11px 10px;}
+      .settingsPrimaryActions > .btn,
+      .settingsPrimaryActions > button.btn{flex:1 1 calc(50% - 4px) !important;}
+    }
+
+    .settingsHintCard{overflow:visible !important;}
+    .settingsHintCard .settingsHintBody{
+      display:block !important;
+      padding-top:14px !important;
+      padding-bottom:14px !important;
+    }
+    .settingsHintCard .settingsHintTitle{
+      font-size:15px;
+      font-weight:900;
+      line-height:1.35;
+      margin:0 0 8px;
+      color:var(--text);
+    }
+
+  </style>
+
 </head>
 <body>
 <div class="overlay" id="overlay" data-action="closeSidebar"></div>
@@ -3706,7 +3824,7 @@ body{-webkit-tap-highlight-color:transparent;}
         <div class="card">
           <div class="hd"><h2>外观与偏好</h2><span class="pill">即时生效</span></div>
           <div class="bd">
-            <div class="row">
+            <div class="row settingsPrimaryActions">
               <button class="btn" data-action="toggleTheme">🌓 切换主题</button>
               <button class="btn" data-action="wipeAll">🧹 清空本地数据</button>
             </div>
@@ -14591,7 +14709,10 @@ function clientAttachments(client){
   }
 }
 </style>
-</head><body><h1>${escapeHtml(fmtZhDate(key))} 当天执行单</h1>${list.length ? list.map((c)=> `<div class="item"><div><strong>${escapeHtml(c.name)}</strong></div><div class="meta">${escapeHtml(c.banquetType)} · ${escapeHtml(c.owner)} · ${escapeHtml(c.status)}</div><div class="meta">${escapeHtml(c.phone || '未填写电话')}</div></div>`).join('') : '<div>当天暂无档期。</div>'}</body></html>`;
+</head><body><h1>${escapeHtml(fmtZhDate(key))} 当天执行单</h1>${list.length ? list.map((c)=> `<div class="item"><div><strong>${escapeHtml(c.name)}</strong></div><div class="meta">${escapeHtml(c.banquetType)} · ${escapeHtml(c.owner)} · ${escapeHtml(c.status)}</div><div class="meta">${escapeHtml(c.phone || '未填写电话')}</div></div>`).join('') : '<div>当天暂无档期。</div>'}
+
+
+</body></html>`;
     const win = window.open('', '_blank');
     if(!win){
       logAction('printDayRun', 'warn', '浏览器拦截了打印窗口，请允许弹窗后重试。');
@@ -16344,12 +16465,12 @@ try{
     if(!old){
       var bar = document.createElement('div');
       bar.id = layoutId;
-      bar.className = 'card';
+      bar.className = 'card settingsHintCard';
       bar.style.marginBottom = '12px';
       bar.innerHTML = [
-        '<div class="hd"><h2>设置快捷入口</h2><span class="pill">稳定优先</span></div>',
-        '<div class="bd">',
-        '<div class="small" style="line-height:1.7">当前仅保留 <b>外观与偏好</b>、<b>备份与迁移</b>、<b>权限与身份</b> 三项可见，其他巡检/调试/阶段说明默认隐藏，减少干扰。</div>',
+        '<div class="bd settingsHintBody">',
+        '<div class="settingsHintTitle">设置说明</div>',
+        '<div class="small" style="line-height:1.8">当前仅保留 <b>外观与偏好</b>、<b>备份与迁移</b>、<b>权限与身份</b> 三项可见，其他巡检/调试/阶段说明默认隐藏，减少干扰。</div>',
         '</div>'
       ].join('');
       sec.insertBefore(bar, sec.firstElementChild);
@@ -17205,6 +17326,146 @@ try{
   }
 }
 </style>
+
+
+
+
+<style id="v18-settings-week-fix">
+/* ===== V18 settings overlap + week navigation usability fix ===== */
+#view-settings,
+#view-settings > .grid.cols2{
+  position:relative !important;
+  z-index:auto !important;
+}
+#view-settings .settingsHintCard{
+  position:relative !important;
+  z-index:0 !important;
+  margin-bottom:12px !important;
+}
+#view-settings .card{
+  overflow:visible !important;
+}
+#view-settings .card > .hd{
+  position:relative !important;
+  top:auto !important;
+  z-index:1 !important;
+  background:var(--card,#fff) !important;
+  backdrop-filter:none !important;
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:8px 10px !important;
+  padding:12px 12px 10px !important;
+  margin:0 !important;
+}
+#view-settings .card > .hd h2{
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  margin:0 !important;
+  line-height:1.35 !important;
+}
+#view-settings .card > .hd .pill{
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+}
+#view-settings .card > .bd{
+  position:relative !important;
+  z-index:0 !important;
+  padding-top:12px !important;
+}
+#view-settings .grid.cols2 > .card:first-child,
+#view-settings > .grid.cols2:first-child > .card:first-child{
+  position:relative !important;
+  top:auto !important;
+  align-self:auto !important;
+}
+#view-settings .row.settingsPrimaryActions{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:8px !important;
+  align-items:stretch !important;
+}
+#view-settings .row.settingsPrimaryActions > *{
+  width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
+#view-settings .row.settingsPrimaryActions + .sep{
+  margin-top:10px !important;
+}
+@media (max-width: 680px){
+  #view-settings .card > .hd h2{
+    flex:1 1 100% !important;
+  }
+  #view-settings .card > .hd .pill{
+    margin-left:0 !important;
+  }
+}
+@media (max-width: 480px){
+  #view-settings .card > .hd{
+    padding:10px 10px 8px !important;
+  }
+  #view-settings .card > .bd{
+    padding:10px !important;
+    padding-top:10px !important;
+  }
+}
+/* Week view: ensure the range label + list update cleanly on mobile */
+#view-schedule .wkGrid{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:8px !important;
+}
+#view-schedule .wkCol{
+  min-width:0 !important;
+}
+#view-schedule .wkHead{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  gap:8px !important;
+  align-items:center !important;
+}
+</style>
+<script id="v18-week-nav-fix">
+(function(){
+  function normalizeDate(d){
+    var x = d instanceof Date ? new Date(d) : new Date(d || Date.now());
+    if(Number.isNaN(x.getTime())) x = new Date();
+    x.setHours(0,0,0,0);
+    return x;
+  }
+  function moveWeek(delta){
+    if(typeof renderScheduleView !== 'function') return false;
+    if(typeof v34ScheduleMode === 'undefined' || v34ScheduleMode !== 'week') return false;
+    var base = (typeof v34ScheduleCursor !== 'undefined' && v34ScheduleCursor) ? normalizeDate(v34ScheduleCursor) : new Date();
+    base.setDate(base.getDate() + (delta * 7));
+    v34ScheduleCursor = base;
+    if(typeof dayKeyOfDate === 'function') v34ScheduleActiveDate = dayKeyOfDate(base);
+    renderScheduleView();
+    return true;
+  }
+  document.addEventListener('click', function(ev){
+    var btn = ev.target && ev.target.closest ? ev.target.closest('#view-schedule [data-action="schedulePrev"], #view-schedule [data-action="scheduleNext"]') : null;
+    if(!btn) return;
+    if(typeof v34ScheduleMode === 'undefined' || v34ScheduleMode !== 'week') return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    if(typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
+    moveWeek(btn.getAttribute('data-action') === 'scheduleNext' ? 1 : -1);
+  }, true);
+
+  document.addEventListener('click', function(ev){
+    var btn = ev.target && ev.target.closest ? ev.target.closest('#view-schedule [data-action="scheduleMode"][data-mode="week"]') : null;
+    if(!btn) return;
+    window.setTimeout(function(){
+      if(typeof v34ScheduleMode !== 'undefined' && v34ScheduleMode === 'week' && typeof renderScheduleView === 'function'){
+        if(typeof v34ScheduleCursor === 'undefined' || !v34ScheduleCursor) v34ScheduleCursor = new Date();
+        renderScheduleView();
+      }
+    }, 0);
+  }, true);
+})();
+</script>
 
 </body>
 </html>
